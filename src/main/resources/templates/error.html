@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Student Dashboard Error Page </title>
+    <div th:replace="fragments/header :: allHeader"></div>
+    <link rel="stylesheet" th:href="@{/assets/css/login.css}"/>
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <div class="form">
+        <div><h3>Error Page</h3></div>
+        <span style="color:red" th:text="${errorMessage}">Bad Request</span>
+        <br><br>
+        <a th:href="@{/}">back to Home page</a>
+    </div>
+</div>
+</body>
+</html>

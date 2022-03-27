@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Student Details </title>
+    <div th:replace="fragments/header :: allHeader"></div>
+    <div th:replace="fragments/header :: DetailsDataTableHeaders"></div>
+    <link rel="stylesheet" th:href="@{/assets/css/detailsPage.css}"/>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/}">Student DashBoard</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="inactive"><a th:href="@{/}">Home</a></li>
+            <li class="inactive" id="coursesControl"><a th:href="@{/course}">Courses</a></li>
+            <li class="inactive" id="usersControl" th:if="${role}==[ADMIN]"><a th:href="@{/users}">Users</a></li>
+            <li class="inactive" id="teachersControl"><a th:href="@{/teachers}">Teachers</a></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+            <li>
+                <a class=" inactive dropdown-item" id="editprofile" th:href="@{/users/profile}"><span
+                        class="glyphicon glyphicon-user"></span> Edit profile</a>
+            </li>
+            <li class="inactive"><a th:href="@{/mylogout}"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="form">
+        <div><h3>Student Details</h3></div>
+        <div class="form-group">
+            <label>Roll no.</label>
+            <input class="form-controll" id="rollno" name="rollno" placeholder="rollno" readonly
+                   th:value="${student.rollno}" type="text">
+        </div>
+
+        <div class="form-group">
+            <label>Name</label>
+            <input class="form-controll" id="name" name="name" placeholder="name" readonly th:value="${student.name}"
+                   type="text">
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+            <input class="form-controll" id="address" name="address" placeholder="address" readonly
+                   th:value="${student.address}" type="text">
+        </div>
+        <div class="form-group">
+            <label>Phone</label>
+            <input class="form-controll" id="phone" name="phone" placeholder="phone" readonly
+                   th:value="${student.phone}" type="text">
+        </div>
+        <div th:unless="${#lists.isEmpty(student.coursesList)}">
+            <h3>Current Enrolled Courses</h3>
+
+            <table class="table table-striped table-bordered nowrap hover" id="studentCourseTable">
+                <thead>
+                <tr>
+                    <th>Sr. no.</th>
+                    <th>Course Id</th>
+                    <th>Course Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="course : ${student.coursesList}">
+                    <td th:text="${courseStat.count}"></td>
+                    <td th:text="${course.courseId}"></td>
+                    <td th:text="${course.courseName}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('#studentCourseTable').DataTable();
+    });
+
+</script>
+</html>
