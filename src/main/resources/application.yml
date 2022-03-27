@@ -4,8 +4,8 @@ spring:
       client:
         registration:
           google:
-            clientId: 565982657326-hq3as9d8ctmbeg75cu66sohutlm4gr5l.apps.googleusercontent.com
-            clientSecret: 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
+            clientId: ${env.GOOGLE_CLIENT_ID}
+            clientSecret: ${env.GOOGLE_CLIENT_SECRET}
             accessTokenUri: https://www.googleapis.com/oauth2/v3/token
             userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
             tokenName: oauth_token
